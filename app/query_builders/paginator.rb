@@ -1,8 +1,8 @@
 class Paginator
   def initialize(scope, query_params, url)
     @query_params = query_params
-    @page = validate_param!("page", 1)
-    @per = validate_param!("per", 2)
+    @page = validate_param!('page', 1)
+    @per = validate_param!('per', 2)
     @scope = scope.page(@page).per(@per)
     @url = url
   end
@@ -13,18 +13,19 @@ class Paginator
 
   def links
     @links ||= pages.each_with_object([]) do |(k, v), links|
-      query_params = @query_params.merge({ "page" => v, "per" => @per }).to_param
+      query_params = @query_params.merge({ 'page' => v, 'per' => @per }).to_param
       links << "<#{@url}?#{query_params}>; rel = \"#{k}\""
-    end.join(", ")
+    end.join(', ')
   end
 
   private
 
   def validate_param!(name, default)
     return default unless @query_params[name]
-    unless (@query_params[name] =~ /\A\d+\z/)
+
+    unless @query_params[name] =~ /\A\d+\z/
       raise QueryBuilderError.new("#{name}=#{@query_params[name]}"),
-            "Invalid Pagination params, only numbers are supported for page and per"
+            'Invalid Pagination params, only numbers are supported for page and per'
     end
 
     @query_params[name]

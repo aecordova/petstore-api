@@ -1,5 +1,5 @@
 class QueryOrchestrator
-  ACTIONS = [:paginate]
+  ACTIONS = [:paginate].freeze
 
   def initialize(scope:, params:, request:, response:, actions: :all)
     @scope = scope
@@ -8,12 +8,13 @@ class QueryOrchestrator
     @response = response
     @actions = actions == :all ? ACTIONS : actions
   end
-  
+
   def run
     @actions.each do |action|
       unless ACTIONS.include? action
         raise InvalidBuilderAction, "#{action} not permitted."
       end
+
       @scope = send(action)
     end
     @scope
@@ -27,5 +28,4 @@ class QueryOrchestrator
     @response.headers['x-next'] = paginator.links
     paginator.paginate
   end
-
 end

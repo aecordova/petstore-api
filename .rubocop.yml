@@ -1,0 +1,100 @@
+AllCops:
+  Exclude:
+    - "db/**/*"
+    - "bin/*" 
+    - "config/**/*"
+    - "Guardfile"
+    - "Rakefile"
+    - "README.md"
+    - "node_modules/**/*"
+
+  DisplayCopNames: true
+
+Layout/LineLength:
+  Max: 90
+Metrics/MethodLength:
+  Include:
+    - "app/controllers/*"
+    - "app/models/*"
+  Max: 20
+Metrics/AbcSize:
+  Include:
+    - "app/controllers/*"
+    - "app/models/*"
+  Max: 50
+Metrics/ClassLength:
+  Max: 150
+Metrics/BlockLength:
+  ExcludedMethods: ['describe']
+  Max: 30
+
+Style/Documentation:
+  Enabled: false
+Style/ClassAndModuleChildren:
+  Enabled: false
+Style/EachForSimpleLoop:
+  Enabled: true
+Style/AndOr:
+  Enabled: true
+Style/DefWithParentheses:
+  Enabled: true
+Style/FrozenStringLiteralComment:
+  EnforcedStyle: never
+Layout/HashAlignment:
+  EnforcedColonStyle: key
+Layout/ExtraSpacing:
+  AllowForAlignment: true
+Layout/MultilineMethodCallIndentation:
+  Enabled: true
+  EnforcedStyle: indented
+Lint/RaiseException:
+ Enabled: true
+Lint/StructNewOverride:
+  Enabled: true
+Style/HashEachMethods:
+  Enabled: true
+Style/HashTransformKeys:
+  Enabled: true
+Style/HashTransformValues:
+  Enabled: true
+Layout/EmptyLinesAroundAttributeAccessor:
+  Enabled: true
+Layout/SpaceAroundMethodCallOperator:
+  Enabled: true
+Lint/DeprecatedOpenSSLConstant:
+  Enabled: true
+Style/ExponentialNotation:
+  Enabled: true
+Style/SlicingWithRange:
+  Enabled: true
+Lint/DuplicateElsifCondition:
+  Enabled: true
+Lint/MixedRegexpCaptureTypes:
+ Enabled: true
+Style/AccessorGrouping:
+ Enabled: true
+Style/ArrayCoercion:
+ Enabled: true
+Style/BisectedAttrAccessor:
+ Enabled: true
+Style/CaseLikeIf:
+ Enabled: true
+Style/HashAsLastArrayItem:
+ Enabled: true
+Style/HashLikeCase:
+ Enabled: true
+Style/RedundantAssignment:
+ Enabled: true
+Style/RedundantFetchBlock:
+ Enabled: true
+Style/RedundantFileExtensionInRequire:
+ Enabled: true
+Style/RedundantRegexpCharacterClass:
+ Enabled: true
+Style/RedundantRegexpEscape:
+ Enabled: true
+
+  
+
+
+

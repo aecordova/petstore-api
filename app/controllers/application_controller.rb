@@ -5,11 +5,12 @@ class ApplicationController < ActionController::API
 
   def orchestrate_query(scope, actions = :all)
     QueryOrchestrator.new(
-      scope: scope, 
-      params: params, 
-      request: request, 
-      response: response, 
-      actions: actions)
+      scope: scope,
+      params: params,
+      request: request,
+      response: response,
+      actions: actions
+    )
       .run
   end
 
@@ -22,12 +23,11 @@ class ApplicationController < ActionController::API
     }
   end
 
-  def not_found!()
+  def not_found!
     render status: :not_found, json: {
       error: {
-        message: "Item not found."
+        message: 'Item not found.'
       }
     }
   end
-
 end
