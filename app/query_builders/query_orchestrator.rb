@@ -2,10 +2,10 @@ class QueryOrchestrator
   ACTIONS = [:paginate]
 
   def initialize(scope:, params:, request:, response:, actions: :all)
-    @scope = @scope
-    @params = @params
-    @request = @requests
-    @response = @response
+    @scope = scope
+    @params = params
+    @request = request
+    @response = response
     @actions = actions == :all ? ACTIONS : actions
   end
   
@@ -16,6 +16,7 @@ class QueryOrchestrator
       end
       @scope = send(action)
     end
+    @scope
   end
 
   private
@@ -23,7 +24,7 @@ class QueryOrchestrator
   def paginate
     current_url = @request.base_url + @request.path
     paginator = Paginator.new(@scope, @request.query_parameters, current_url)
-    @response.headers['link'] = paginator.links
+    @response.headers['x-next'] = paginator.links
     paginator.paginate
   end
 

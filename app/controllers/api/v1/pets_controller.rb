@@ -1,18 +1,16 @@
-class V1::PetsController < ApplicationController
-  PAGE_SIZE = 100
-
+class Api::V1::PetsController < ApplicationController
   def index
     pets = orchestrate_query(Pet.all)
-    render serialize(pets)
+    render json: pets
   end
   
   def show
-    render serialize(pet)
+
   end
 
   def create
     if pet.save
-      render serialize(pet)
+      render json: pet
     else
       unprocessable_entity!(pet)
     end
@@ -25,6 +23,7 @@ class V1::PetsController < ApplicationController
   end
   
   def pet_params
-    params.require(:data).permit(:name, :tag)
+    params.require(:pet).permit(:name, :tag)
   end
+
 end

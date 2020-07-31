@@ -3,7 +3,7 @@ class Paginator
     @query_params = query_params
     @page = validate_param!("page", 1)
     @per = validate_param!("per", 100)
-    @scope = @scope.page(@page).per(@per)
+    @scope = scope.page(@page).per(@per)
     @url = url
   end
 
