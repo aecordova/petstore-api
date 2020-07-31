@@ -1,4 +1,5 @@
 class ApplicationController < ActionController::API
+  rescue_from ActiveRecord::RecordNotFound, with: :not_found!
 
   protected
 
@@ -8,7 +9,25 @@ class ApplicationController < ActionController::API
       params: params, 
       request: request, 
       response: response, 
-      actions: actions).run
+      actions: actions)
+      .run
+  end
+
+  def unprocessable_entity!(resource)
+    render status: :unprocessable_entity, json: {
+      error: {
+        message: "Invalid parameters for resource #{resource.class}.",
+        invalid_params: resource.errors
+      }
+    }
+  end
+
+  def not_found!()
+    render status: :not_found, json: {
+      error: {
+        message: "Item not found."
+      }
+    }
   end
 
 end

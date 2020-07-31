@@ -2,7 +2,7 @@ class Paginator
   def initialize(scope, query_params, url)
     @query_params = query_params
     @page = validate_param!("page", 1)
-    @per = validate_param!("per", 100)
+    @per = validate_param!("per", 2)
     @scope = scope.page(@page).per(@per)
     @url = url
   end
@@ -14,7 +14,7 @@ class Paginator
   def links
     @links ||= pages.each_with_object([]) do |(k, v), links|
       query_params = @query_params.merge({ "page" => v, "per" => @per }).to_param
-      links << "<#{@url}>?#{query_params}>; rel = \"#{k}\""
+      links << "<#{@url}?#{query_params}>; rel = \"#{k}\""
     end.join(", ")
   end
 

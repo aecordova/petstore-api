@@ -1,18 +1,18 @@
 class Api::V1::PetsController < ApplicationController
   def index
     pets = orchestrate_query(Pet.all)
-    render json: pets
+    render json: pets.to_json(only: [:id, :name, :tag])
   end
   
   def show
-
+    render json: pet.to_json(only: [:id, :name, :tag])
   end
 
   def create
     if pet.save
-      render json: pet
+      render status: :created
     else
-      unprocessable_entity!(pet)
+       unprocessable_entity!(pet)
     end
   end
 
