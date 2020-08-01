@@ -1,5 +1,7 @@
 class ApplicationController < ActionController::API
   rescue_from ActiveRecord::RecordNotFound, with: :not_found!
+  rescue_from QueryBuilderError, with: :builder_error
+
 
   protected
 
@@ -27,6 +29,16 @@ class ApplicationController < ActionController::API
     render status: :not_found, json: {
       error: {
         message: 'Item not found.'
+      }
+    }
+  end
+
+  def builder_error(error)
+    render status: 400, json: {
+      error: {
+        type: error.class,
+        message: error.message,
+        invalid_params: error.invalid_params
       }
     }
   end
